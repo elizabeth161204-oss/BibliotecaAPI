@@ -1,6 +1,7 @@
 using BibliotecaAPI.Dominio.Interfaces;
+using BibliotecaAPI.Dominio.Entidades;
 
-namespace BibliotecaAPI.Persistencia.Repositorios.Libro;
+namespace BibliotecaAPI.Persistencia.Repositorios.Libros;
 
 public class RepositorioLibroEnMemoria : IRepositorioLibro
 {
@@ -30,4 +31,17 @@ public class RepositorioLibroEnMemoria : IRepositorioLibro
             libros.Remove(libro);
         }
     }
+
+    public void Actualizar(Libro libro)
+{
+    var libroExistente = ObtenerPorId(libro.Id);
+
+    if (libroExistente != null)
+    {
+        libroExistente.Titulo = libro.Titulo;
+        libroExistente.Autor = libro.Autor;
+        libroExistente.AnioPublicacion = libro.AnioPublicacion;
+        libroExistente.Precio = libro.Precio;
+    }
+}
 }

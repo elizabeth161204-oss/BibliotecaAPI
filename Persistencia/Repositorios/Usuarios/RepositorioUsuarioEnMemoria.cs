@@ -39,4 +39,15 @@ public class RepositorioUsuarioEnMemoria : IRepositorioUsuario
             usuarioExistente.Saldo = usuario.Saldo;
         }
     }
+
+    public void Eliminar(Guid id)
+    {
+        var usuario = ObtenerPorId(id);
+
+        if (usuario != null)
+        {
+            usuarios.Remove(usuario);
+        }
+    }
+
 }

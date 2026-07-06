@@ -12,17 +12,21 @@ public class LibroController : ControllerBase
     private readonly ObtenerLibroPorIdService obtenerLibroPorIdService;
     private readonly ObtenerTodosLosLibrosService obtenerTodosLosLibrosService;
     private readonly EliminarLibroService eliminarLibroService;
+    private readonly ActualizarLibroService actualizarLibroService;
 
     public LibroController(
         CrearLibroService crearLibroService,
         ObtenerLibroPorIdService obtenerLibroPorIdService,
         ObtenerTodosLosLibrosService obtenerTodosLosLibrosService,
-        EliminarLibroService eliminarLibroService)
+        EliminarLibroService eliminarLibroService,
+        ActualizarLibroService actualizarLibroService
+        )
     {
         this.crearLibroService = crearLibroService;
         this.obtenerLibroPorIdService = obtenerLibroPorIdService;
         this.obtenerTodosLosLibrosService = obtenerTodosLosLibrosService;
         this.eliminarLibroService = eliminarLibroService;
+        this.actualizarLibroService = actualizarLibroService;
     }
 
     [HttpPost]
@@ -31,6 +35,14 @@ public class LibroController : ControllerBase
         return Ok(crearLibroService.Ejecutar(input));
     }
 
+    [HttpPatch("{id}")]
+    public IActionResult Actualizar(Guid id, PatchLibroInput input)
+    {
+        actualizarLibroService.Ejecutar(id, input);
+
+        return NoContent();
+    }
+    
     [HttpGet]
     public ActionResult<List<LibroDto>> ObtenerTodos()
     {

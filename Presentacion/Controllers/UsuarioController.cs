@@ -11,16 +11,20 @@ public class UsuarioController : ControllerBase
     private readonly RegistrarUsuarioService registrarUsuarioService;
     private readonly ObtenerTodosLosUsuariosService obtenerTodosLosUsuariosService;
     private readonly ObtenerUsuarioPorIdService obtenerUsuarioPorIdService;
+    private readonly ActualizarUsuarioService actualizarUsuarioService;
+    private readonly EliminarUsuarioService eliminarUsuarioService;
     
 
    public UsuarioController(RegistrarUsuarioService registrarUsuarioService, 
         ObtenerTodosLosUsuariosService obtenerTodosLosUsuariosService, 
-        ObtenerUsuarioPorIdService obtenerUsuarioPorIdService)
+        ObtenerUsuarioPorIdService obtenerUsuarioPorIdService,
+        ActualizarUsuarioService actualizarUsuarioService, EliminarUsuarioService eliminarUsuarioService)
     {
         this.registrarUsuarioService = registrarUsuarioService;
         this.obtenerTodosLosUsuariosService = obtenerTodosLosUsuariosService;
         this.obtenerUsuarioPorIdService = obtenerUsuarioPorIdService;
-        
+        this.actualizarUsuarioService = actualizarUsuarioService;
+        this.eliminarUsuarioService = eliminarUsuarioService;
     }
 
     [HttpPost]
@@ -48,6 +52,22 @@ public class UsuarioController : ControllerBase
     }
 
         return Ok(usuario);
+    }
+
+    [HttpPatch("{id}")]
+    public IActionResult Actualizar(Guid id, ActualizarUsuarioInput input)
+    {
+        actualizarUsuarioService.Ejecutar(id, input);
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult Eliminar(Guid id)
+    {
+        eliminarUsuarioService.Ejecutar(id);
+
+        return NoContent();
     }
 
     

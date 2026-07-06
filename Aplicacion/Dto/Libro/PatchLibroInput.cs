@@ -7,4 +7,6 @@ public class PatchLibroInput
     public string? Autor { get; set; }
 
     public int? AnioPublicacion { get; set; }
+
+    public decimal? Precio { get; set; }
 }

@@ -13,4 +13,5 @@ public interface IRepositorioUsuario
     Usuario? ObtenerPorId(Guid id);
 
     List<Usuario> ObtenerTodos();
+    void Eliminar(Guid id);
 }

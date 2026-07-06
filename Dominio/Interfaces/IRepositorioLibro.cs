@@ -11,5 +11,7 @@ public interface IRepositorioLibro
     List<Libro> ObtenerTodos();
 
     void Eliminar(Guid id);
+
+    void Actualizar(Libro libro);
    
 }

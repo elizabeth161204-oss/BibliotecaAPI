@@ -39,6 +39,13 @@ public class ComprarLibroService
     if (compraExistente != null)
         throw new Exception("El usuario ya compró este libro.");
 
+    if (usuario.Saldo < libro.Precio)
+    {
+        throw new Exception("El usuario no tiene saldo suficiente para comprar este libro.");
+    }
+
+    usuario.Saldo -= libro.Precio;
+
     Compra compra = new Compra
     {
         Id = Guid.NewGuid(),
@@ -48,6 +55,13 @@ public class ComprarLibroService
     };
 
     repositorioCompra.Crear(compra);
+
+    if (usuario.Saldo < libro.Precio)
+    {
+        throw new Exception("El usuario no tiene saldo suficiente.");
+    }
+
+    usuario.Saldo -= libro.Precio;
 }
 
     

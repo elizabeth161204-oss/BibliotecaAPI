@@ -1,6 +1,6 @@
 using BibliotecaAPI.Aplicacion.Servicios.Libro;
 using BibliotecaAPI.Dominio.Interfaces;
-using BibliotecaAPI.Persistencia.Repositorios.Libro;
+using BibliotecaAPI.Persistencia.Repositorios.Libros;
 using BibliotecaAPI.Aplicacion.Servicios.Usuario;
 using BibliotecaAPI.Persistencia.Repositorios.Usuarios;
 using BibliotecaAPI.Persistencia.Repositorios.Compras;
@@ -10,7 +10,6 @@ using BibliotecaAPI.Aplicacion.Servicios.Compras;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IRepositorioLibro, RepositorioLibroEnMemoria>();
-
 builder.Services.AddScoped<CrearLibroService>();
 builder.Services.AddScoped<ObtenerLibroPorIdService>();
 builder.Services.AddScoped<ObtenerTodosLosLibrosService>();
@@ -22,7 +21,9 @@ builder.Services.AddScoped<IRepositorioCompra, RepositorioCompraEnMemoria>();
 builder.Services.AddScoped<ComprarLibroService>();
 builder.Services.AddScoped<ObtenerUsuarioPorIdService>();
 builder.Services.AddScoped<ObtenerTodasLasComprasService>();
-
+builder.Services.AddScoped<ActualizarLibroService>();
+builder.Services.AddScoped<ActualizarUsuarioService>();
+builder.Services.AddScoped<EliminarUsuarioService>();
 // Add services to the container.
 
 builder.Services.AddControllers();
