@@ -29,20 +29,6 @@ public class LibroController : ControllerBase
         this.actualizarLibroService = actualizarLibroService;
     }
 
-    [HttpPost]
-    public ActionResult<LibroDto> Crear(CrearLibroInput input)
-    {
-        return Ok(crearLibroService.Ejecutar(input));
-    }
-
-    [HttpPatch("{id}")]
-    public IActionResult Actualizar(Guid id, PatchLibroInput input)
-    {
-        actualizarLibroService.Ejecutar(id, input);
-
-        return NoContent();
-    }
-    
     [HttpGet]
     public ActionResult<List<LibroDto>> ObtenerTodos()
     {
@@ -60,6 +46,20 @@ public class LibroController : ControllerBase
         return Ok(libro);
     }
 
+    [HttpPost]
+    public ActionResult<LibroDto> Crear(CrearLibroInput input)
+    {
+        return Ok(crearLibroService.Ejecutar(input));
+    }
+
+    [HttpPatch("{id}")]
+    public IActionResult Actualizar(Guid id, PatchLibroInput input)
+    {
+        actualizarLibroService.Ejecutar(id, input);
+
+        return NoContent();
+    }
+    
     [HttpDelete("{id}")]
     public IActionResult Eliminar(Guid id)
     {

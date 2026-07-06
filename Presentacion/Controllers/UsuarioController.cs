@@ -27,13 +27,6 @@ public class UsuarioController : ControllerBase
         this.eliminarUsuarioService = eliminarUsuarioService;
     }
 
-    [HttpPost]
-    public IActionResult Registrar(CrearUsuarioInput input)
-    {
-        registrarUsuarioService.Ejecutar(input);
-
-        return Ok("Usuario registrado correctamente");
-    }
 
     [HttpGet]
     public IActionResult ObtenerTodos()
@@ -52,6 +45,14 @@ public class UsuarioController : ControllerBase
     }
 
         return Ok(usuario);
+    }
+
+    [HttpPost]
+    public IActionResult Registrar(CrearUsuarioInput input)
+    {
+        registrarUsuarioService.Ejecutar(input);
+
+        return Ok("Usuario registrado correctamente");
     }
 
     [HttpPatch("{id}")]

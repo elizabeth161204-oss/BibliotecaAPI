@@ -15,6 +15,18 @@ public class RegistrarUsuarioService
 
     public void Ejecutar(CrearUsuarioInput input)
     {
+        if (string.IsNullOrWhiteSpace(input.Nombre))
+        throw new Exception("El nombre es obligatorio.");
+
+        if (string.IsNullOrWhiteSpace(input.Email))
+        throw new Exception("El email es obligatorio.");
+
+        if (string.IsNullOrWhiteSpace(input.Password))
+        throw new Exception("La contraseña es obligatoria.");
+
+        if (input.Saldo < 0)
+        throw new Exception("El saldo no puede ser negativo.");
+
         var existe = repositorio.ObtenerPorEmail(input.Email);
 
         if (existe != null)

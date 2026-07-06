@@ -19,6 +19,18 @@ public class ActualizarLibroService
         if (libro == null)
             throw new Exception("El libro no existe.");
 
+        if (input.Titulo != null && string.IsNullOrWhiteSpace(input.Titulo))
+        throw new Exception("El título no puede estar vacío.");
+
+        if (input.Autor != null && string.IsNullOrWhiteSpace(input.Autor))
+        throw new Exception("El autor no puede estar vacío.");
+
+        if (input.AnioPublicacion.HasValue && input.AnioPublicacion.Value <= 0)
+        throw new Exception("El año de publicación es inválido.");
+
+        if (input.Precio.HasValue && input.Precio.Value <= 0)
+        throw new Exception("El precio debe ser mayor que cero.");
+
         if (input.Titulo != null)
             libro.Titulo = input.Titulo;
 
