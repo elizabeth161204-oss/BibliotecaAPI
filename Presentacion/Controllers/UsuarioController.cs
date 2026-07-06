@@ -10,13 +10,17 @@ public class UsuarioController : ControllerBase
 {
     private readonly RegistrarUsuarioService registrarUsuarioService;
     private readonly ObtenerTodosLosUsuariosService obtenerTodosLosUsuariosService;
+    private readonly ObtenerUsuarioPorIdService obtenerUsuarioPorIdService;
+    
 
-    public UsuarioController(
-        RegistrarUsuarioService registrarUsuarioService,
-        ObtenerTodosLosUsuariosService obtenerTodosLosUsuariosService)
+   public UsuarioController(RegistrarUsuarioService registrarUsuarioService, 
+        ObtenerTodosLosUsuariosService obtenerTodosLosUsuariosService, 
+        ObtenerUsuarioPorIdService obtenerUsuarioPorIdService)
     {
         this.registrarUsuarioService = registrarUsuarioService;
         this.obtenerTodosLosUsuariosService = obtenerTodosLosUsuariosService;
+        this.obtenerUsuarioPorIdService = obtenerUsuarioPorIdService;
+        
     }
 
     [HttpPost]
@@ -32,4 +36,19 @@ public class UsuarioController : ControllerBase
     {
         return Ok(obtenerTodosLosUsuariosService.Ejecutar());
     }
+
+    [HttpGet("{id}")]
+    public IActionResult ObtenerPorId(Guid id)
+    {
+        var usuario = obtenerUsuarioPorIdService.Ejecutar(id);
+
+        if (usuario == null)
+    {
+        return NotFound("Usuario no encontrado.");
+    }
+
+        return Ok(usuario);
+    }
+
+    
 }

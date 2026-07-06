@@ -26,4 +26,17 @@ public class RepositorioUsuarioEnMemoria : IRepositorioUsuario
     {
         return usuarios;
     }
+
+    public void Actualizar(Usuario usuario)
+    {
+        var usuarioExistente = usuarios.FirstOrDefault(u => u.Id == usuario.Id);
+
+        if (usuarioExistente != null)
+        {
+            usuarioExistente.Nombre = usuario.Nombre;
+            usuarioExistente.Email = usuario.Email;
+            usuarioExistente.Password = usuario.Password;
+            usuarioExistente.Saldo = usuario.Saldo;
+        }
+    }
 }
