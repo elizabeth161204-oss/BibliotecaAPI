@@ -21,27 +21,36 @@ public class ComprarLibroService
     }
 
     public void Ejecutar(ComprarLibroInput input)
+{
+    var usuario = repositorioUsuario.ObtenerPorId(input.UsuarioId);
+
+    if (usuario == null)
+        throw new Exception("El usuario no existe.");
+
+    var libro = repositorioLibro.ObtenerPorId(input.LibroId);
+
+    if (libro == null)
+        throw new Exception("El libro no existe.");
+
+    var compraExistente = repositorioCompra.ObtenerPorUsuarioYLibro(
+        input.UsuarioId,
+        input.LibroId);
+
+    if (compraExistente != null)
+        throw new Exception("El usuario ya compró este libro.");
+
+    Compra compra = new Compra
     {
-        var usuario = repositorioUsuario.ObtenerPorId(input.UsuarioId);
+        Id = Guid.NewGuid(),
+        UsuarioId = input.UsuarioId,
+        LibroId = input.LibroId,
+        FechaCompra = DateTime.Now
+    };
 
-        if (usuario == null)
-            throw new Exception("El usuario no existe.");
+    repositorioCompra.Crear(compra);
+}
 
-        var libro = repositorioLibro.ObtenerPorId(input.LibroId);
-
-        if (libro == null)
-            throw new Exception("El libro no existe.");
-
-        Compra compra = new Compra
-        {
-            Id = Guid.NewGuid(),
-            UsuarioId = input.UsuarioId,
-            LibroId = input.LibroId,
-            FechaCompra = DateTime.Now
-        };
-
-        repositorioCompra.Crear(compra);
-    }
+    
 
    
 }

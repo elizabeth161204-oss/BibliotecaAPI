@@ -21,7 +21,7 @@ builder.Services.AddScoped<ObtenerTodosLosUsuariosService>();
 builder.Services.AddScoped<IRepositorioCompra, RepositorioCompraEnMemoria>();
 builder.Services.AddScoped<ComprarLibroService>();
 builder.Services.AddScoped<ObtenerUsuarioPorIdService>();
-
+builder.Services.AddScoped<ObtenerTodasLasComprasService>();
 
 // Add services to the container.
 

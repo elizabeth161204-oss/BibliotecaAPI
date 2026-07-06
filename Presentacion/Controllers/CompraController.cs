@@ -9,10 +9,12 @@ namespace BibliotecaAPI.Presentacion.Controllers;
 public class CompraController : ControllerBase
 {
     private readonly ComprarLibroService comprarLibroService;
+    private readonly ObtenerTodasLasComprasService obtenerTodasLasComprasService;
 
-    public CompraController(ComprarLibroService comprarLibroService)
+    public CompraController(ComprarLibroService comprarLibroService, ObtenerTodasLasComprasService obtenerTodasLasComprasService)
     {
         this.comprarLibroService = comprarLibroService;
+        this.obtenerTodasLasComprasService = obtenerTodasLasComprasService;
     }
 
     [HttpPost]
@@ -21,5 +23,11 @@ public class CompraController : ControllerBase
         comprarLibroService.Ejecutar(input);
 
         return Ok("Compra realizada correctamente.");
+    }
+
+    [HttpGet]
+    public IActionResult ObtenerTodas()
+    {
+        return Ok(obtenerTodasLasComprasService.Ejecutar());
     }
 }

@@ -7,4 +7,7 @@ public interface IRepositorioCompra
     void Crear(Compra compra);
 
     List<Compra> ObtenerTodas();
+
+    Compra? ObtenerPorUsuarioYLibro(Guid usuarioId, Guid libroId);
+    
 }

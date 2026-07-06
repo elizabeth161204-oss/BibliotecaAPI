@@ -16,4 +16,11 @@ public class RepositorioCompraEnMemoria : IRepositorioCompra
     {
         return compras;
     }
+
+    public Compra? ObtenerPorUsuarioYLibro(Guid usuarioId, Guid libroId)
+{
+    return compras.FirstOrDefault(c =>
+        c.UsuarioId == usuarioId &&
+        c.LibroId == libroId);
+}
 }
